@@ -1,0 +1,17 @@
+version: '3'
+services:
+  php-fpm:
+    image: php:5.5-fpm
+    volumes:
+      - .:/var/www
+  nginx:
+    build:
+      context: ./docker/nginx
+    volumes:
+      - .:/var/www
+    depends_on:
+      - php-fpm
+    env_file:
+      - .env
+    ports:
+      - ${NGINX_PORT}:80
