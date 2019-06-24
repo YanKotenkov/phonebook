@@ -1,5 +1,4 @@
 <?php
-
 use actions\AuthAction;
 
 return [

@@ -1,12 +1,19 @@
 <?php
 namespace actions;
 
+use Exception;
 use lib\base\Action;
+use lib\http\Request;
 
 class AuthAction extends Action
 {
-    public function __invoke(\lib\http\Request $request)
+    /**
+     * @param Request $request
+     * @return false|mixed|string
+     * @throws Exception
+     */
+    public function __invoke(Request $request)
     {
-        return $this->render(ROOT_DIR . '/views/auth.php', ['testVar' => 'test']);
+        return $this->render('auth', ['testVar' => 'test']);
     }
 }
