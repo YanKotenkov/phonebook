@@ -4,6 +4,7 @@ services:
     image: php:5.5-fpm
     volumes:
       - .:/var/www
+
   nginx:
     build:
       context: ./docker/nginx
@@ -15,3 +16,14 @@ services:
       - .env
     ports:
       - ${NGINX_PORT}:80
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=phonebook
+      - MYSQL_USER=phonebook
+      - MYSQL_PASSWORD=root
