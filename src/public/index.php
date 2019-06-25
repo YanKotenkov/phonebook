@@ -3,6 +3,10 @@ mb_internal_encoding('UTF-8');
 header('Content-Type: text/html; charset=utf-8');
 include_once '../autoload.php';
 define('ROOT_DIR', __DIR__ . '/../');
+define('MYSQL_HOST', getenv('MYSQL_HOST'));
+define('MYSQL_DATABASE', getenv('MYSQL_DATABASE'));
+define('MYSQL_USER', getenv('MYSQL_USER'));
+define('MYSQL_PASSWORD', getenv('MYSQL_PASSWORD'));
 
 $config = require_once(ROOT_DIR . '/config/main.php');
 
