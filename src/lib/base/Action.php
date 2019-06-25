@@ -3,20 +3,22 @@ namespace lib\base;
 
 use Exception;
 use lib\http\Request;
+use lib\http\Response;
 use RuntimeException;
 
 abstract class Action
 {
     /**
      * @param Request $request
-     * @return mixed
+     * @return Response
+     * @throws Exception
      */
     abstract public function __invoke(Request $request);
 
     /**
      * @param string $viewName
      * @param array $params
-     * @return false|string
+     * @return Response
      * @throws Exception
      */
     protected function render($viewName, $params = [])
@@ -30,13 +32,11 @@ abstract class Action
             ob_start();
             extract($params);
             include $viewFilePath;
-            $content = ob_get_clean();
+            return new Response(ob_get_clean());
         } catch (Exception $e) {
             ob_end_clean();
             throw $e;
         }
-
-        return $content;
     }
 
     /**

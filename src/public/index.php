@@ -2,7 +2,7 @@
 mb_internal_encoding('UTF-8');
 header('Content-Type: text/html; charset=utf-8');
 include_once '../autoload.php';
-define('ROOT_DIR', __DIR__ . '/../protected');
+define('ROOT_DIR', __DIR__ . '/../');
 
 $config = require_once(ROOT_DIR . '/config/main.php');
 
@@ -13,7 +13,6 @@ $urlResolver = new \lib\base\UrlResolver(
     $request
 );
 $action = $urlResolver->getAction();
-$content = $action($request);
-
-$response = new \lib\http\Response($content);
+/** @var \lib\http\Response $response */
+$response = $action($request);
 $response->send();
