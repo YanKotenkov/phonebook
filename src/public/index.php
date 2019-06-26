@@ -1,6 +1,5 @@
 <?php
 mb_internal_encoding('UTF-8');
-header('Content-Type: text/html; charset=utf-8');
 include_once '../autoload.php';
 define('ROOT_DIR', __DIR__ . '/../');
 define('MYSQL_HOST', getenv('MYSQL_HOST'));
