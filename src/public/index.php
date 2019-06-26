@@ -2,6 +2,7 @@
 mb_internal_encoding('UTF-8');
 include_once '../autoload.php';
 define('ROOT_DIR', __DIR__ . '/../');
+define('VIEW_PATH', ROOT_DIR . '/views/');
 define('MYSQL_HOST', getenv('MYSQL_HOST'));
 define('MYSQL_DATABASE', getenv('MYSQL_DATABASE'));
 define('MYSQL_USER', getenv('MYSQL_USER'));
