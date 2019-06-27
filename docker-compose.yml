@@ -34,8 +34,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./data/mysql:/var/lib/mysql
       - ./migrations:/docker-entrypoint-initdb.d
+      - ./data/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}

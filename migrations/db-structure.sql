@@ -7,7 +7,7 @@ create table if not exists user
 	email varchar(255) not null,
 	ins_date datetime default CURRENT_TIMESTAMP not null,
 	constraint user_login_uindex
-		unique (login)
+		unique (login),
     constraint user_email_uindex
 		unique (email)
 );
