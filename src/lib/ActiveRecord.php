@@ -177,7 +177,7 @@ abstract class ActiveRecord
             $this->query .= ' WHERE ';
         }
         foreach (array_keys($this->where) as $key => $name) {
-            if ($key !== 0 && $key !== (count($this->where) - 1)) {
+            if ($key !== 0 && $key !== (count($this->where))) {
                 $this->query .= ' AND ';
             }
             $this->query .= "$name = :$name";
