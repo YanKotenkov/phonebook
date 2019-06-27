@@ -3,16 +3,32 @@ namespace lib\http;
 
 class Response
 {
+    const RESPONSE_CODE_OK = 200;
+    const RESPONSE_CODE_NOT_FOUND = 404;
+
+    public static $statusTexts = [
+        self::RESPONSE_CODE_OK => 'OK',
+        self::RESPONSE_CODE_NOT_FOUND => 'Not Found',
+    ];
+
     /** @var string */
     public $content;
+    /** @var int */
+    public $code;
+    /** @var array */
+    public $headers;
 
     /**
      * Response constructor.
      * @param string $content
+     * @param int $code
+     * @param array $headers
      */
-    public function __construct($content)
+    public function __construct($content = '', $code = self::RESPONSE_CODE_OK, $headers = [])
     {
         $this->content = $content;
+        $this->code = $code;
+        $this->headers = $headers;
     }
 
     /**
@@ -21,6 +37,7 @@ class Response
      */
     public function send()
     {
+        $this->setStatusCode($this->code);
         $this->sendHeaders();
         echo $this->content;
 
@@ -28,11 +45,22 @@ class Response
     }
 
     /**
+     * Устанавливает код http ответа
+     * @param int $code
+     */
+    public function setStatusCode($code)
+    {
+        if (isset(self::$statusTexts[$code])) {
+            header("HTTP/1.0 {$code}" . ' ' . self::$statusTexts[$code]);
+        }
+    }
+
+    /**
      * @return void
      */
-    public static function notFound()
+    public function notFound()
     {
-        header("HTTP/1.0 404 Not Found");
+        $this->setStatusCode(self::RESPONSE_CODE_NOT_FOUND);
         exit();
     }
 
@@ -46,6 +74,9 @@ class Response
         }
 
         header('Content-Type: text/html; charset=utf-8');
+        foreach ($this->headers as $name => $value) {
+            header("{$name}: {$value}");
+        }
 
         return $this;
     }

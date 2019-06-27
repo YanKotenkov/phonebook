@@ -1,5 +1,5 @@
 <?php
-namespace lib\base;
+namespace lib;
 
 use lib\http\Request;
 use lib\http\Response;
@@ -33,7 +33,7 @@ class UrlResolver
             $actionClass = new $this->routes[$uri]['action'];
             return $actionClass;
         } else {
-            Response::notFound();
+            (new Response())->notFound();
         }
 
         return null;

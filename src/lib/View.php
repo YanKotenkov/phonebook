@@ -1,5 +1,5 @@
 <?php
-namespace lib\base;
+namespace lib;
 
 use Exception;
 use RuntimeException;
@@ -60,7 +60,7 @@ class View
      */
     public function registerCssFile($name)
     {
-        echo "<link rel='stylesheet' type='text/css' href='assets/css/$name.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='css/$name.css'>";
     }
 
     /**

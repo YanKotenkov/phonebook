@@ -1,7 +1,7 @@
 <?php
-namespace ar;
+namespace models;
 
-use lib\base\ActiveRecord;
+use lib\ActiveRecord;
 
 /**
  * @method self one()

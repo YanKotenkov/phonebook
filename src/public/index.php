@@ -12,7 +12,7 @@ $config = require_once(ROOT_DIR . '/config/main.php');
 
 $request = new \lib\http\Request($_GET, $_POST, $_SERVER, $_FILES);
 
-$urlResolver = new \lib\base\UrlResolver(
+$urlResolver = new lib\UrlResolver(
     $config['routes'],
     $request
 );

@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \lib\base\View $this
+ * @var \lib\View $this
  */
 ?>
 <html lang="ru-RU">

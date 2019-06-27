@@ -1,6 +1,11 @@
 <?php
-$routes = require_once('routes.php');
+
+use actions\AuthAction;
 
 return [
-    'routes' => $routes,
+    'routes' => [
+        '/auth' => [
+            'action' => AuthAction::class,
+        ],
+    ],
 ];

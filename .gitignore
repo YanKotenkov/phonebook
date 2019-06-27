@@ -1,2 +1,6 @@
+# phpstorm project files
 .idea
+# environment file
 .env
+# mysql data
+.data/mysql

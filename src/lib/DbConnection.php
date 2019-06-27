@@ -1,5 +1,5 @@
 <?php
-namespace lib\base;
+namespace lib;
 
 use PDO;
 
@@ -19,7 +19,7 @@ class DbConnection
 
     private function __construct()
     {
-        $dsn = 'mysql:host=' . MYSQL_HOST . '; dbname=' . MYSQL_DATABASE;
+        $dsn = ':hmysqlost=' . MYSQL_HOST . '; dbname=' . MYSQL_DATABASE;
         $this->connection = new PDO(
             $dsn,
             MYSQL_USER,

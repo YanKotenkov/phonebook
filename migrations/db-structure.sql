@@ -8,6 +8,8 @@ create table if not exists user
 	ins_date datetime default CURRENT_TIMESTAMP not null,
 	constraint user_login_uindex
 		unique (login)
+    constraint user_email_uindex
+		unique (email)
 );
 
 ALTER TABLE user CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

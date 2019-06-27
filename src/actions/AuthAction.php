@@ -1,7 +1,7 @@
 <?php
 namespace actions;
 
-use lib\base\Action;
+use lib\Action;
 use lib\http\Request;
 
 class AuthAction extends Action

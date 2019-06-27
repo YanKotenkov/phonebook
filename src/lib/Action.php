@@ -1,5 +1,5 @@
 <?php
-namespace lib\base;
+namespace lib;
 
 use Exception;
 use lib\http\Request;
