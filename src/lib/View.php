@@ -15,6 +15,7 @@ class View
     private $viewName;
     /** @var Action */
     private $controller;
+    private $bodyContent;
 
     /**
      * View constructor.
@@ -37,14 +38,21 @@ class View
     public function getContent(array $params = [])
     {
         try {
-            ob_start();
-            extract($params);
-            include $this->getViewFilePath($this->controller->layout);
-            return ob_get_clean();
+            $this->bodyContent = $this->render($this->viewName, $params);
+
+            return $this->render($this->controller->layout);
         } catch (Exception $e) {
             ob_end_clean();
             throw $e;
         }
+    }
+
+    public function render($viewName, $params = [])
+    {
+        ob_start();
+        extract($params, EXTR_OVERWRITE);
+        include_once $this->getViewFilePath($viewName);
+        return ob_get_clean();
     }
 
     /**
@@ -52,7 +60,7 @@ class View
      */
     public function getBodyContent()
     {
-        return include $this->getViewFilePath($this->viewName);
+        return $this->bodyContent;
     }
 
     /**

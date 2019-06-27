@@ -30,7 +30,6 @@ abstract class Action
      */
     protected function render($viewName, array $params = [])
     {
-        $params = array_merge($params);
         $view = new View($this, $viewName, $this->title);
         $content = $view->getContent($params);
 

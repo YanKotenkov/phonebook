@@ -18,6 +18,8 @@
         </div>
     </nav>
     <header><h1 class="title-main"><?= $this->title ?></h1></header>
-    <?php $this->getBodyContent() ?>
+    <div class="container">
+        <?= $this->getBodyContent() ?>
+    </div>
 </body>
 </html>
