@@ -35,4 +35,15 @@ abstract class Action
 
         return new Response($content);
     }
+
+    /**
+     * @param string $url
+     * @return Response
+     */
+    protected function redirect($url)
+    {
+        return (new Response('', 302, [
+            'Location' => $url,
+        ]))->send();
+    }
 }
