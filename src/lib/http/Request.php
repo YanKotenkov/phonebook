@@ -68,6 +68,14 @@ class Request
     }
 
     /**
+     * @return string
+     */
+    public function isPost()
+    {
+        return $this->getRequestParams('server', 'REQUEST_METHOD', 'GET');
+    }
+
+    /**
      * @param string $requestParam
      * @param string $name
      * @param mixed $defaultValue

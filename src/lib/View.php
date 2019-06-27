@@ -15,6 +15,7 @@ class View
     private $viewName;
     /** @var Action */
     private $controller;
+    /** @var string */
     private $bodyContent;
 
     /**
@@ -47,11 +48,17 @@ class View
         }
     }
 
+    /**
+     * @param string $viewName
+     * @param array $params
+     * @return false|string
+     */
     public function render($viewName, $params = [])
     {
         ob_start();
         extract($params, EXTR_OVERWRITE);
         include_once $this->getViewFilePath($viewName);
+
         return ob_get_clean();
     }
 
