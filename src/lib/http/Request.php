@@ -72,7 +72,9 @@ class Request
      */
     public function isPost()
     {
-        return $this->getRequestParams('server', 'REQUEST_METHOD', 'GET');
+        $method = $this->getRequestParams('server', 'REQUEST_METHOD');
+
+        return $method === 'POST';
     }
 
     /**
