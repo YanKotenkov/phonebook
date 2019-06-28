@@ -1,5 +1,5 @@
 <?php
-namespace validators;
+namespace lib\validators;
 
 class StringValidator extends BaseValidator
 {
@@ -9,49 +9,64 @@ class StringValidator extends BaseValidator
     public $max;
     /** @var int */
     public $exactLength;
+    /** @var array */
+    protected $defaultRules = [
+        'isString',
+    ];
 
-    /** @inheritdoc */
-    public function run()
+    /**
+     * @param string $attribute
+     * @param string $value
+     */
+    public function isString($attribute, $value)
     {
-        foreach ($this->attributes as $name => $value) {
-            if (!$this->isString($value) || !$this->validateMin($value) || !$this->validateMax($value) || !$this->validateExactLength()) {
-                $this->addError($name, $value);
-                return false;
-            }
+        if (!is_string($value)) {
+            $this->addError(
+                $attribute,
+                "{$this->getAttributeLabel($attribute)} не является строкой"
+            );
         }
-
-        return true;
     }
 
     /**
+     * @param string $attribute
      * @param string $value
-     * @return bool
      */
-    public function isString($value)
+    public function min($attribute, $value)
     {
-        return is_string($value);
+        if (mb_strlen($value) < $this->min) {
+            $this->addError(
+                $attribute,
+                "{$this->getAttributeLabel($attribute)} должен длиннее, чем {$this->min}"
+            );
+        }
     }
 
     /**
+     * @param string $attribute
      * @param string $value
-     * @return bool
      */
-    public function validateMin($value)
+    public function max($attribute, $value)
     {
-        return mb_strlen($value) >= $this->min;
+        if (mb_strlen($value) > $this->max) {
+            $this->addError(
+                $attribute,
+                "{$this->getAttributeLabel($attribute)} должен быть короче, чем {$this->max}"
+            );
+        }
     }
 
     /**
-     * @param string $value
-     * @return bool
+     * @param string $attribute
+     * @param $value
      */
-    public function validateMax($value)
+    public function exactLength($attribute, $value)
     {
-        return mb_strlen($value) <= $this->min;
-    }
-
-    public function validateExactLength($value)
-    {
-        return mb_strlen($value) === (int)$this->min;
+        if (mb_strlen($value) !== (int)$this->exactLength) {
+            $this->addError(
+                $attribute,
+                "Длина {$this->getAttributeLabel($attribute)} должена быть {$this->exactLength}"
+            );
+        }
     }
 }

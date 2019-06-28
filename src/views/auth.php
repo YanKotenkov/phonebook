@@ -7,6 +7,15 @@
 <form action="/auth" method="post">
     <div class="card">
         <div class="card-body">
+            <?php if (isset($errors)) : ?>
+                <div class="errors border border-danger bg-danger">
+                    <?php foreach ($errors as $error) : ?>
+                        <?php foreach ($error as $errorMessage) : ?>
+                            <div><?= $errorMessage ?></div>
+                        <?php endforeach ?>
+                    <?php endforeach ?>
+                </div>
+            <?php endif ?>
             <div class="form-group">
                 <label for="login">Логин</label>
                 <input

@@ -3,12 +3,12 @@ namespace lib\http;
 
 class Response
 {
-    const RESPONSE_CODE_OK = 200;
-    const RESPONSE_CODE_NOT_FOUND = 404;
+    const HTTP_CODE_OK = 200;
+    const HTTP_CODE_NOT_FOUND = 404;
 
     public static $statusTexts = [
-        self::RESPONSE_CODE_OK => 'OK',
-        self::RESPONSE_CODE_NOT_FOUND => 'Not Found',
+        self::HTTP_CODE_OK => 'OK',
+        self::HTTP_CODE_NOT_FOUND => 'Not Found',
     ];
 
     /** @var string */
@@ -24,7 +24,7 @@ class Response
      * @param int $code
      * @param array $headers
      */
-    public function __construct($content = '', $code = self::RESPONSE_CODE_OK, $headers = [])
+    public function __construct($content = '', $code = self::HTTP_CODE_OK, $headers = [])
     {
         $this->content = $content;
         $this->code = $code;
@@ -60,7 +60,7 @@ class Response
      */
     public function notFound()
     {
-        $this->setStatusCode(self::RESPONSE_CODE_NOT_FOUND);
+        $this->setStatusCode(self::HTTP_CODE_NOT_FOUND);
         exit();
     }
 

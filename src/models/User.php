@@ -30,4 +30,16 @@ class User extends ActiveRecord
     {
         return 'id';
     }
+
+    /** @inheritDoc */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'login' => 'Логин',
+            'password' => 'Пароль',
+            'email' => 'Email',
+            'ins_date' => 'Дата добавления',
+        ];
+    }
 }

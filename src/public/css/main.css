@@ -6,3 +6,9 @@
 .title-main {
     text-align: center;
 }
+
+.errors {
+    padding: 0 10px;
+    margin-top: 5px;
+    display: inline-block;
+}

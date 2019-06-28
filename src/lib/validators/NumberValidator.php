@@ -1,5 +1,5 @@
 <?php
-namespace validators;
+namespace lib\validators;
 
 class NumberValidator extends BaseValidator
 {
@@ -7,44 +7,52 @@ class NumberValidator extends BaseValidator
     public $min;
     /** @var int */
     public $max;
+    /** @var array  */
+    protected $defaultRules = [
+        'isNumber',
+    ];
 
-    /** @inheritdoc */
-    public function run()
+    /**
+     * @param string $attribute
+     * @param int $value
+     */
+    public function isNumber($attribute, $value)
     {
-        foreach ($this->attributes as $name => $value) {
-            if (!$this->isNumber($value) || !$this->validateMin($value) || !$this->validateMax($value)) {
-                $this->addError($name, $value);
-                return false;
-            }
+        if (!(is_int(intval($value)) && (mb_strlen($value) === mb_strlen(intval($value))))) {
+            $this->addError(
+                $attribute,
+                "{$this->getAttributeLabel($attribute)} должен быть числом"
+            );
         }
-
-        return true;
     }
 
     /**
+     * @param string $attribute
      * @param int $value
-     * @return bool
+     * @return void
      */
-    public function isNumber($value)
+    public function min($attribute, $value)
     {
-        return is_int(intval($value)) && (mb_strlen($value) === mb_strlen(intval($value)));
+        if ($value < $this->min) {
+            $this->addError(
+                $attribute,
+                "Значение {$this->getAttributeLabel($attribute)} должно быть больше чем {$this->min}"
+            );
+        }
     }
 
     /**
+     * @param string $attribute
      * @param int $value
-     * @return bool
+     * @return void
      */
-    public function validateMin($value)
+    public function max($attribute, $value)
     {
-        return $value >= $this->min;
-    }
-
-    /**
-     * @param int $value
-     * @return bool
-     */
-    public function validateMax($value)
-    {
-        return $value <= $this->max;
+        if ($value > $this->max) {
+            $this->addError(
+                $attribute,
+                "Значение {$this->getAttributeLabel($attribute)} должно быть не больше чем {$this->max}"
+            );
+        }
     }
 }
