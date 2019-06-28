@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-body">
             <?php if (isset($errors)) : ?>
-                <div class="errors border border-danger bg-danger">
+                <div class="errors border border-danger bg-danger py-2 px-3 rounded">
                     <?php foreach ($errors as $error) : ?>
                         <?php foreach ($error as $errorMessage) : ?>
                             <div><?= $errorMessage ?></div>
