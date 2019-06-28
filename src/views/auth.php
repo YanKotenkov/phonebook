@@ -25,11 +25,12 @@
                     id="login"
                     placeholder="Логин"
                     value="<?= $user->login ?>"
+                    required
                 >
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input class="form-control" type="password" name="password" id="password" placeholder="Пароль">
+                <input class="form-control" type="password" name="password" id="password" placeholder="Пароль" required>
             </div>
             <input type="submit" class="btn btn-success" value="Войти">
         </div>
