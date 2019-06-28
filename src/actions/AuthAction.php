@@ -38,15 +38,16 @@ class AuthAction extends Action
     /** @inheritDoc */
     public function getValidators(Request $request)
     {
+        $user = new User();
         return [
             new StringValidator([
                 'login' => $request->body('login'),
                 'password' => $request->body('password'),
-            ], new User()),
+            ], $user),
             new RequiredValidator([
                 'login' => $request->body('login'),
                 'password' => $request->body('password'),
-            ], new User()),
+            ], $user),
         ];
     }
 }
