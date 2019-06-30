@@ -10,6 +10,11 @@
 use lib\View;
 $this->registerJsFile('contact')
 ?>
-<div class="contact-list">
-    <?= $this->render('_contact_table', compact('user', 'contactForm', 'contactList', 'sortParam', 'sortOrder')) ?>
+<div class="contacts-wrapper">
+    <div class="contact-list">
+        <?= $this->render('_contact_table', compact('contactForm', 'contactList', 'sortParam', 'sortOrder')) ?>
+    </div>
+    <div class="divide"></div>
+    <div class="contact-info">
+    </div>
 </div>

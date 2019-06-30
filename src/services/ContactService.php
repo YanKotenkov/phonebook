@@ -2,6 +2,7 @@
 namespace services;
 
 use forms\ContactForm;
+use lib\BaseForm;
 use models\Contact;
 
 class ContactService
@@ -19,7 +20,7 @@ class ContactService
     /**
      * ContactService constructor.
      * @param Contact $contactModel
-     * @param ContactForm $contactForm
+     * @param ContactForm|BaseForm $contactForm
      */
     public function __construct(Contact $contactModel, ContactForm $contactForm)
     {
@@ -28,7 +29,6 @@ class ContactService
     }
 
     /**
-     * @param mixed $sort
      * @return ContactForm[]
      */
     public function getContactList()
@@ -49,6 +49,9 @@ class ContactService
         return $data;
     }
 
+    /**
+     * @return array
+     */
     public function getSort()
     {
         if ($this->sortParam && $this->sortOrder) {
@@ -59,5 +62,22 @@ class ContactService
         }
 
         return [];
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getContactInfo($id)
+    {
+        $fields = [];
+
+        $contact = $id ? $this->contactModel->findByPk($id) : $this->contactModel;
+
+        foreach ($this->contactForm->mapAttributes() as $dbField => $formField) {
+            $fields[$formField] = $contact->{$dbField};
+        }
+
+        return $fields;
     }
 }

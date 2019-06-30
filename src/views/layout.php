@@ -20,7 +20,7 @@
                 <?php if ($this->isAuthenticated()) : ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link disabled">
-                            <?= $this->getUser()->login ?>
+                            <?= $this->encode($this->getUser()->login) ?>
                         </a>
                     </li>
                 <?php endif ?>

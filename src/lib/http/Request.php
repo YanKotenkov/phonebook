@@ -21,7 +21,7 @@ class Request
      */
     public function __construct($query = [], $body = [], $server = [], $files = [])
     {
-        $this->query = $query;
+        $this->query = $this->filterQueryParams($query);
         $this->body = $body;
         $this->server = $server;
         $this->files = $files;
@@ -83,6 +83,17 @@ class Request
     public function isAjax()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
+    }
+
+    public function filterQueryParams($params)
+    {
+        $filteredQueryParams = [];
+        foreach ($params as $key => $value) {
+            $key = ltrim($key, '?');
+            $filteredQueryParams[$key] = $value;
+        }
+
+        return $filteredQueryParams;
     }
 
     /**

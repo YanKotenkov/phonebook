@@ -6,6 +6,11 @@
     display: inline-block;
 }
 
-#contact-table-caption {
+#contact-table-caption, #contact-detail-caption {
     caption-side: top;
+}
+
+.contacts-wrapper {
+    display: grid;
+    grid-template-columns: auto 25px auto;
 }

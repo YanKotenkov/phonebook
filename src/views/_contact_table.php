@@ -71,7 +71,7 @@ use lib\View;
     </thead>
     <tbody>
     <?php foreach ($contactList as $id => $contact) : ?>
-        <tr>
+        <tr class="show-contact-info" data-id="<?= $id ?>">
             <td><?= $this->encode($contact->name) ?></td>
             <td><?= $this->encode($contact->secondName) ?></td>
             <td><?= $this->encode($contact->phone) ?></td>

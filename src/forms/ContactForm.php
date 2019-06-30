@@ -2,6 +2,7 @@
 namespace forms;
 
 use lib\BaseForm;
+use models\Contact;
 
 class ContactForm extends BaseForm
 {
@@ -38,6 +39,9 @@ class ContactForm extends BaseForm
         ];
     }
 
+    /**
+     * @return array
+     */
     public function mapAttributes()
     {
         return [
