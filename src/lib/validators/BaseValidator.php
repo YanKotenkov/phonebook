@@ -3,6 +3,7 @@ namespace lib\validators;
 
 use Exception;
 use lib\ActiveRecord;
+use lib\BaseForm;
 
 abstract class BaseValidator
 {
@@ -19,7 +20,9 @@ abstract class BaseValidator
 
     /**
      * BaseValidator constructor.
-     * @param array $config
+     * @param array $attributes
+     * @param BaseForm $model
+     * @param array $rules
      * @throws Exception
      */
     public function __construct(array $attributes, $model = null, $rules = [])

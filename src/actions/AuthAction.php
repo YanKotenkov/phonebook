@@ -4,50 +4,51 @@ namespace actions;
 use lib\Action;
 use lib\http\Request;
 use lib\validators\RequiredValidator;
-use lib\validators\StringValidator;
-use models\User;
 use services\AuthService;
+use forms\UserForm;
 
+/**
+ * Экшн аутентификации
+ */
 class AuthAction extends Action
 {
     /** @var string */
-    protected $title = 'Авторизация';
+    protected $title = 'Вход';
+    /** @var string */
+    protected $formClass = UserForm::class;
+    /** @var bool */
+    protected $needAuthentication = false;
 
     /** @inheritDoc */
     public function run(Request $request)
     {
-        $user = new User();
-
         if ($request->isPost()) {
-            $user->login = $request->body('login');
-            $user->password = $request->body('password');
+            $this->form->load($request->body());
 
             if ($this->validatorRunner->hasErrors()) {
-                return $this->render('auth', ['user' => $user, 'errors' => $this->validatorRunner->getErrors()]);
+                return $this->render('auth', ['user' => $this->form, 'errors' => $this->validatorRunner->getErrors()]);
             }
 
-            $authService = new AuthService($user);
+            $authService = new AuthService($this->form);
             if ($authService->login()) {
                 $this->redirect('/');
+            } else {
+                return $this->render('auth', ['user' => $this->form, 'errors' => $authService->errors]);
             }
         }
 
-        return $this->render('auth', ['user' => $user]);
+        return $this->render('auth', ['user' => $this->form]);
     }
 
     /** @inheritDoc */
     public function getValidators(Request $request)
     {
-        $user = new User();
+        $userForm = new UserForm();
         return [
-            new StringValidator([
-                'login' => $request->body('login'),
-                'password' => $request->body('password'),
-            ], $user),
             new RequiredValidator([
                 'login' => $request->body('login'),
                 'password' => $request->body('password'),
-            ], $user),
+            ], $userForm),
         ];
     }
 }

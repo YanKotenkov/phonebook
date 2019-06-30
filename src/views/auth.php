@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \lib\View $this
- * @var \models\User $user
+ * @var \forms\UserForm $user
  */
 ?>
 <form action="/auth" method="post">
@@ -17,22 +17,30 @@
                 </div>
             <?php endif ?>
             <div class="form-group">
-                <label for="login">Логин</label>
+                <label for="login"><?= $user->getAttributeLabel('login') ?></label>
                 <input
                     class="form-control"
                     type="text"
                     name="login"
                     id="login"
-                    placeholder="Логин"
+                    placeholder="<?= $user->getAttributeLabel('login') ?>"
                     value="<?= $user->login ?>"
-                    required
+                    <?= $user->isRequired('login') ? 'required' : '' ?>
                 >
             </div>
             <div class="form-group">
-                <label for="password">Пароль</label>
-                <input class="form-control" type="password" name="password" id="password" placeholder="Пароль" required>
+                <label for="password"><?= $user->getAttributeLabel('password') ?></label>
+                <input
+                    class="form-control"
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="<?= $user->getAttributeLabel('password') ?>"
+                    <?= $user->isRequired('password') ? 'required' : '' ?>
+                >
             </div>
             <input type="submit" class="btn btn-success" value="Войти">
+            <a href="/register" class="btn btn-primary">Регистрация</a>
         </div>
     </div>
 </form>

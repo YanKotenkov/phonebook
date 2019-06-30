@@ -49,23 +49,6 @@ abstract class ActiveRecord
     }
 
     /**
-     * @return array
-     */
-    public function attributeLabels()
-    {
-        return [];
-    }
-
-    /**
-     * @param string $name
-     * @return string
-     */
-    public function getAttributeLabel($name)
-    {
-        return isset($this->attributeLabels()[$name]) ? $this->attributeLabels()[$name] : '';
-    }
-
-    /**
      * @return $this
      */
     public function find()
