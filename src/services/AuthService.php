@@ -44,10 +44,7 @@ class AuthService
             $this->errors['password'][] = "Неправильный пароль";
             return false;
         }
-
-        $session = new Session();
-        $session->start();
-        $session->addKey(Session::SESSION_USER_ID, $user->id);
+        $this->startSession($user->id);
 
         return true;
     }
@@ -68,9 +65,10 @@ class AuthService
             return false;
         }
 
-        if (!$this->createUser()) {
+        if (!$user = $this->createUser()) {
             return false;
         }
+        $this->startSession($user->id);
 
         return true;
     }
@@ -86,7 +84,7 @@ class AuthService
 
     /**
      * Создание пользователя
-     * @return bool
+     * @return User
      */
     private function createUser()
     {
@@ -97,10 +95,21 @@ class AuthService
 
         if (!$user->insert(['login', 'password', 'email'])) {
             $this->errors = $user->getErrors();
-            return false;
+            return null;
         }
 
-        return true;
+        return $user;
+    }
+
+    /**
+     * Запускает сессию и записывает в неё id пользователя
+     * @param int $userId
+     */
+    private function startSession($userId)
+    {
+        $session = new Session();
+        $session->start();
+        $session->addKey(Session::SESSION_USER_ID, $userId);
     }
 
     /**
