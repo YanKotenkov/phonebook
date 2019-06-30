@@ -79,6 +79,14 @@ class View
     }
 
     /**
+     * @param string $name
+     */
+    public function registerJsFile($name)
+    {
+        echo "<script src='js/$name.js' type='application/javascript'></script>";
+    }
+
+    /**
      * @return bool
      */
     public function isAuthenticated()
@@ -92,6 +100,16 @@ class View
     public function getUser()
     {
         return $this->controller->getUser();
+    }
+
+    /**
+     * @param string $content
+     * @param bool $doubleEncode
+     * @return string
+     */
+    public static function encode($content, $doubleEncode = true)
+    {
+        return htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE,  'UTF-8', $doubleEncode);
     }
 
     /**

@@ -2,7 +2,7 @@
 /**
  * @var \forms\RegisterForm $registerForm
  */
-?>
+ ?>
 <form action="/register" method="post">
     <div class="card">
         <div class="card-body">
@@ -23,7 +23,7 @@
                     name="login"
                     id="login"
                     placeholder="<?= $registerForm->getLabel('login') ?>"
-                    value="<?= $registerForm->login ?>"
+                    value="<?= $this->encode($registerForm->login) ?>"
                     <?= $registerForm->isRequired('login') ? 'required' : '' ?>
                 >
             </div>
@@ -46,7 +46,7 @@
                     name="email"
                     id="email"
                     placeholder="<?= $registerForm->getLabel('email') ?>"
-                    value="<?= $registerForm->email ?>"
+                    value="<?= $this->encode($registerForm->email) ?>"
                     <?= $registerForm->isRequired('email') ? 'required' : '' ?>
                 >
             </div>

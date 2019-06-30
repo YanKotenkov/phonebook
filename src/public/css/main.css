@@ -5,3 +5,7 @@
 .errors {
     display: inline-block;
 }
+
+#contact-table-caption {
+    caption-side: top;
+}

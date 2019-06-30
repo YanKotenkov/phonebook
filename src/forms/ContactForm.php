@@ -1,15 +1,52 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yan
- * Date: 30.06.19
- * Time: 18:55
- */
-
 namespace forms;
 
+use lib\BaseForm;
 
-class ContactForm
+class ContactForm extends BaseForm
 {
+    /** @var string */
+    public $name;
+    /** @var string */
+    public $secondName;
+    /** @var mixed */
+    public $photo;
+    /** @var string */
+    public $email;
+    /** @var string */
+    public $phone;
+    /** @var string */
+    public $insDate;
 
+    /** @var array */
+    public static $requiredFields = [
+        'name',
+        'phone',
+        'email',
+    ];
+
+    /** @inheritdoc */
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Имя',
+            'secondName' => 'Фамилия',
+            'photo' => 'Фотография',
+            'email' => 'Email',
+            'phone' => 'Телефон',
+            'insDate' => 'Дата создания',
+        ];
+    }
+
+    public function mapAttributes()
+    {
+        return [
+            'name' => 'name',
+            'second_name' => 'secondName',
+            'photo' => 'photo',
+            'email' => 'email',
+            'phone' => 'phone',
+            'ins_date' => 'insDate',
+        ];
+    }
 }

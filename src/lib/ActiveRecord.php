@@ -9,27 +9,21 @@ use PDOStatement;
  */
 abstract class ActiveRecord
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $query;
-    /**
-     * @var array
-     */
+    /** @var array */
     private $where = [];
+    /** @var array */
+    private $sort;
     /**
      * @var array
      */
     private $errors;
 
-    /**
-     * @return string
-     */
+    /** @return string */
     abstract function tableName();
 
-    /**
-     * @return string
-     */
+    /** @return string */
     abstract function primaryKey();
 
     /**
@@ -103,6 +97,14 @@ abstract class ActiveRecord
         $sth->execute();
 
         return $sth->fetchAll(PDO::FETCH_CLASS, static::class);
+    }
+
+    /**
+     * @param array $sort
+     */
+    public function sort(array $sort)
+    {
+        $this->sort = $sort;
     }
 
     /**
@@ -182,6 +184,14 @@ abstract class ActiveRecord
             }
             $this->query .= "$name = :$name";
         }
+
+        if ($this->sort) {
+            $this->query .= ' ORDER BY ';
+            foreach ($this->sort as $field => $order) {
+                $this->query .= "{$field} $order";
+            }
+        }
+
         $sth = $db->prepare($this->query);
         foreach ($this->where as $name => $value) {
             $sth->bindValue(":$name", $value);

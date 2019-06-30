@@ -27,15 +27,27 @@ class UrlResolver
      */
     public function getAction()
     {
-        $uri = $this->request->server('REQUEST_URI');
+        $uri = $this->getUri();
 
         if (in_array($uri, array_keys($this->routes))) {
-            $actionClass = new $this->routes[$uri]['action'];
+            $route = $this->routes[$uri];
+            $actionClass = new $route['action'];
             return $actionClass;
         } else {
             (new Response())->notFound();
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUri()
+    {
+        $requestUri = $this->request->server('REQUEST_URI');
+        $parsedUrl = parse_url($requestUri);
+
+        return isset($parsedUrl['path']) ? $parsedUrl['path'] : $requestUri;
     }
 }

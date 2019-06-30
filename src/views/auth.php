@@ -24,7 +24,7 @@
                     name="login"
                     id="login"
                     placeholder="<?= $user->getLabel('login') ?>"
-                    value="<?= $user->login ?>"
+                    value="<?= $this->encode($user->login) ?>"
                     <?= $user->isRequired('login') ? 'required' : '' ?>
                 >
             </div>

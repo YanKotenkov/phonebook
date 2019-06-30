@@ -17,5 +17,10 @@
 	"jquery": true,
 	"browser": true,
 	"esversion": 6,
-	"devel": true
+	"devel": true,
+	"enforceall": true,
+	"globals": {
+		"jQuery": false,
+		"$": false
+	}
 }

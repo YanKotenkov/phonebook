@@ -88,6 +88,20 @@ abstract class Action
     }
 
     /**
+     * @param string $viewName
+     * @param array $params
+     * @return Response
+     */
+    protected function renderPartial($viewName, array $params = [])
+    {
+        $view = new View($this, $viewName);
+
+        $content = $view->render($viewName, $params);
+
+        return new Response($content);
+    }
+
+    /**
      * @param Request $request
      * @return array
      * @throws Exception
