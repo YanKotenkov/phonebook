@@ -1,0 +1,21 @@
+{
+	"camelcase": true,
+	"curly": true,
+	"eqeqeq": true,
+	"forin": true,
+	"freeze": true,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"noempty": true,
+	"nonew": true,
+	"plusplus": false,
+	"undef": true,
+	"unused": true,
+	"strict": true,
+	"jquery": true,
+	"browser": true,
+	"esversion": 6,
+	"devel": true
+}
