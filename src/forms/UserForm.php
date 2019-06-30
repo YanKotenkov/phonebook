@@ -7,6 +7,8 @@ class UserForm extends \lib\BaseForm
     public $login;
     /** @var string */
     public $password;
+    /** @var string */
+    public $passwordConfirm;
 
     /** @inheritDoc */
     public function attributeLabels()
@@ -15,7 +17,7 @@ class UserForm extends \lib\BaseForm
             'login' => 'Логин',
             'password' => 'Пароль',
             'email' => 'Email',
-            'ins_date' => 'Дата добавления',
+            'ins_date' => 'Дата создания',
         ];
     }
 

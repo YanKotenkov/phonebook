@@ -79,6 +79,22 @@ class View
     }
 
     /**
+     * @return bool
+     */
+    public function isAuthenticated()
+    {
+        return $this->controller->isAuthenticated();
+    }
+
+    /**
+     * @return \models\User
+     */
+    public function getUser()
+    {
+        return $this->controller->getUser();
+    }
+
+    /**
      * @param string $viewName
      * @return string
      */

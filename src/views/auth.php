@@ -17,25 +17,25 @@
                 </div>
             <?php endif ?>
             <div class="form-group">
-                <label for="login"><?= $user->getAttributeLabel('login') ?></label>
+                <label for="login"><?= $user->getLabel('login') ?></label>
                 <input
                     class="form-control"
                     type="text"
                     name="login"
                     id="login"
-                    placeholder="<?= $user->getAttributeLabel('login') ?>"
+                    placeholder="<?= $user->getLabel('login') ?>"
                     value="<?= $user->login ?>"
                     <?= $user->isRequired('login') ? 'required' : '' ?>
                 >
             </div>
             <div class="form-group">
-                <label for="password"><?= $user->getAttributeLabel('password') ?></label>
+                <label for="password"><?= $user->getLabel('password') ?></label>
                 <input
                     class="form-control"
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="<?= $user->getAttributeLabel('password') ?>"
+                    placeholder="<?= $user->getLabel('password') ?>"
                     <?= $user->isRequired('password') ? 'required' : '' ?>
                 >
             </div>

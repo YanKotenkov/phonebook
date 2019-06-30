@@ -58,6 +58,22 @@ abstract class Action
     abstract public function run(Request $request);
 
     /**
+     * @return \models\User
+     */
+    public function getUser()
+    {
+        return $this->session->getUser();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAuthenticated()
+    {
+        return $this->session->has(Session::SESSION_USER_ID);
+    }
+
+    /**
      * @param string $viewName
      * @param array $params
      * @return Response
@@ -92,11 +108,4 @@ abstract class Action
         ]))->send();
     }
 
-    /**
-     * @return bool
-     */
-    protected function isAuthenticated()
-    {
-        return $this->session->has(Session::SESSION_USER_ID);
-    }
 }

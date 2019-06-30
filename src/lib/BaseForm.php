@@ -15,7 +15,7 @@ abstract class BaseForm
      * @param string $name
      * @return string
      */
-    public function getAttributeLabel($name)
+    public function getLabel($name)
     {
         return isset($this->attributeLabels()[$name]) ? $this->attributeLabels()[$name] : '';
     }

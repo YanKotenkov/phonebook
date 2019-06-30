@@ -16,36 +16,36 @@
                 </div>
             <?php endif ?>
             <div class="form-group">
-                <label for="login"><?= $registerForm->getAttributeLabel('login') ?></label>
+                <label for="login"><?= $registerForm->getLabel('login') ?></label>
                 <input
                     class="form-control"
                     type="text"
                     name="login"
                     id="login"
-                    placeholder="<?= $registerForm->getAttributeLabel('login') ?>"
+                    placeholder="<?= $registerForm->getLabel('login') ?>"
                     value="<?= $registerForm->login ?>"
                     <?= $registerForm->isRequired('login') ? 'required' : '' ?>
                 >
             </div>
             <div class="form-group">
-                <label for="password"><?= $registerForm->getAttributeLabel('password') ?></label>
+                <label for="password"><?= $registerForm->getLabel('password') ?></label>
                 <input
                     class="form-control"
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="<?= $registerForm->getAttributeLabel('password') ?>"
+                    placeholder="<?= $registerForm->getLabel('password') ?>"
                     <?= $registerForm->isRequired('password') ? 'required' : '' ?>
                 >
             </div>
             <div class="form-group">
-                <label for="email"><?= $registerForm->getAttributeLabel('email') ?></label>
+                <label for="email"><?= $registerForm->getLabel('email') ?></label>
                 <input
                     class="form-control"
                     type="text"
                     name="email"
                     id="email"
-                    placeholder="<?= $registerForm->getAttributeLabel('email') ?>"
+                    placeholder="<?= $registerForm->getLabel('email') ?>"
                     value="<?= $registerForm->email ?>"
                     <?= $registerForm->isRequired('email') ? 'required' : '' ?>
                 >

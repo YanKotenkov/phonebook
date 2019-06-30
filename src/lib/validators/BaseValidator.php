@@ -60,8 +60,8 @@ abstract class BaseValidator
      */
     public function getAttributeLabel($attribute)
     {
-        if (isset($this->model) && method_exists($this->model, 'getAttributeLabel')) {
-            return $this->model->getAttributeLabel($attribute);
+        if (isset($this->model) && method_exists($this->model, 'getLabel')) {
+            return $this->model->getLabel($attribute);
         }
 
         return $attribute;
