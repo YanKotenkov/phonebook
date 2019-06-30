@@ -9,6 +9,8 @@ class StringValidator extends BaseValidator
     public $max;
     /** @var int */
     public $exactLength;
+    /** @var bool */
+    public $onlyLatin;
     /** @var array */
     protected $defaultRules = [
         'isString',
@@ -52,6 +54,20 @@ class StringValidator extends BaseValidator
             $this->addError(
                 $attribute,
                 "{$this->getAttributeLabel($attribute)} должен быть короче, чем {$this->max}"
+            );
+        }
+    }
+
+    /**
+     * @param string $attribute
+     * @param string $value
+     */
+    public function onlyLatin($attribute, $value)
+    {
+        if (!preg_match('/^[A-Za-z0-9]+$/', $value)) {
+            $this->addError(
+                $attribute,
+                "{$this->getAttributeLabel($attribute)} должен содержать только латинские буквы и символы"
             );
         }
     }

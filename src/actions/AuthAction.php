@@ -3,7 +3,9 @@ namespace actions;
 
 use lib\Action;
 use lib\http\Request;
+use lib\validators\PasswordValidator;
 use lib\validators\RequiredValidator;
+use lib\validators\StringValidator;
 use services\AuthService;
 use forms\UserForm;
 
@@ -49,6 +51,13 @@ class AuthAction extends Action
                 'login' => $request->body('login'),
                 'password' => $request->body('password'),
             ], $userForm),
+            new StringValidator([
+                'login' => $request->body('login'),
+                'password' => $request->body('password'),
+            ], $this->form, [
+                'onlyLatin' => true,
+            ]),
+            new PasswordValidator(['password' => $request->body('password')], $this->form),
         ];
     }
 }

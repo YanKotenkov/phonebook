@@ -5,7 +5,9 @@ use forms\RegisterForm;
 use lib\Action;
 use lib\http\Request;
 use lib\validators\EmailValidator;
+use lib\validators\PasswordValidator;
 use lib\validators\RequiredValidator;
+use lib\validators\StringValidator;
 use services\AuthService;
 
 /**
@@ -47,14 +49,21 @@ class RegisterAction extends Action
     /** @inheritdoc */
     public function getValidators(Request $request)
     {
-        $fields = [];
+        $requiredFields = [];
         foreach ($this->form->getRequiredFields() as $field) {
-            $fields[$field] = $request->body($field);
+            $requiredFields[$field] = $request->body($field);
         }
 
         return [
-            new RequiredValidator($fields, $this->form),
+            new RequiredValidator($requiredFields, $this->form),
+            new StringValidator([
+                'login' => $request->body('login'),
+                'password' => $request->body('password'),
+            ], $this->form, [
+                'onlyLatin' => true,
+            ]),
             new EmailValidator(['email' => $request->body('email')], $this->form),
+            new PasswordValidator(['password' => $request->body('password')], $this->form),
         ];
     }
 }
