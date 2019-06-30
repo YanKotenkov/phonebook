@@ -2,6 +2,7 @@
 namespace services;
 
 use forms\ContactForm;
+use lib\helpers\NumberHelper;
 use lib\BaseForm;
 use models\Contact;
 
@@ -39,7 +40,7 @@ class ContactService
 
         $data = [];
         foreach ($contacts as $contact) {
-            $contactForm = new contactForm();
+            $contactForm = new ContactForm();
             foreach ($this->contactForm->mapAttributes() as $modelAttribute => $formAttribute) {
                 $contactForm->$formAttribute = $contact->$modelAttribute;
             }
@@ -77,6 +78,7 @@ class ContactService
         foreach ($this->contactForm->mapAttributes() as $dbField => $formField) {
             $fields[$formField] = $contact->{$dbField};
         }
+        $fields['phoneToWords'] = NumberHelper::sumToWords($contact->phone);
 
         return $fields;
     }

@@ -36,6 +36,7 @@ class ContactForm extends BaseForm
             'email' => 'Email',
             'phone' => 'Телефон',
             'insDate' => 'Дата создания',
+            'phoneToWords' => 'Телефон в буквенном представлении',
         ];
     }
 
