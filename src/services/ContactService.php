@@ -34,9 +34,7 @@ class ContactService
      */
     public function getContactList()
     {
-        $sort = $this->getSort();
-
-        $contacts = $this->contactModel->getAll($sort);
+        $contacts = $this->contactModel->getAll($this->contactForm->userId, $this->getSort());
 
         $data = [];
         foreach ($contacts as $contact) {

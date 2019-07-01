@@ -16,6 +16,8 @@ class ContactForm extends BaseForm
     public $email;
     /** @var string */
     public $phone;
+    /** @var int */
+    public $userId;
     /** @var string */
     public $insDate;
 
@@ -37,6 +39,7 @@ class ContactForm extends BaseForm
             'phone' => 'Телефон',
             'insDate' => 'Дата создания',
             'phoneToWords' => 'Телефон в буквенном представлении',
+            'userId' => 'Id пользователя',
         ];
     }
 
@@ -52,6 +55,7 @@ class ContactForm extends BaseForm
             'email' => 'email',
             'phone' => 'phone',
             'ins_date' => 'insDate',
+            'user_id' => 'userId',
         ];
     }
 }

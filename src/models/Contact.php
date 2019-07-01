@@ -17,6 +17,8 @@ class Contact extends ActiveRecord
     public $email;
     /** @var string */
     public $phone;
+    /** @var int */
+    public $user_id;
 
     /** @inheritdoc */
     public function tableName()
@@ -31,11 +33,13 @@ class Contact extends ActiveRecord
     }
 
     /**
+     * @param int $userId
+     * @param array $sort
      * @return ActiveRecord[]|Contact[]
      */
-    public function getAll($sort = [])
+    public function getAll($userId, $sort = [])
     {
-        $query = $this->find();
+        $query = $this->find()->where(['user_id' => $userId]);
         if ($sort) {
             $query->sort($sort);
         }

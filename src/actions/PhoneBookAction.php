@@ -22,7 +22,9 @@ class PhoneBookAction extends Action
     {
         $sortParam = $request->query('sortParam');
         $sortOrder = $request->query('sortOrder');
-        $contactService = new ContactService(new Contact(), new ContactForm());
+        $this->form->load(['userId' => $this->getUser()->id]);
+
+        $contactService = new ContactService(new Contact(), $this->form);
         $contactService->sortParam = $sortParam;
         $contactService->sortOrder = $sortOrder;
 
