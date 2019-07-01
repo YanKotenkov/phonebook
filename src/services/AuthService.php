@@ -35,13 +35,8 @@ class AuthService
             'login' => $this->userForm->login,
         ]);
 
-        if (!$user) {
-            $this->errors['login'][] = "Пользователь с таким логином не найден";
-            return false;
-        }
-
-        if (!$this->verifyPassword($this->userForm->password, $user->password)) {
-            $this->errors['password'][] = "Неправильный пароль";
+        if (!$user || !$this->verifyPassword($this->userForm->password, $user->password)) {
+            $this->errors['all'][] = "Неправильный логин или пароль";
             return false;
         }
         $this->startSession($user->id);

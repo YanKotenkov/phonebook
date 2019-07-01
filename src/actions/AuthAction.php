@@ -57,7 +57,6 @@ class AuthAction extends Action
             ], $this->form, [
                 'onlyLatin' => true,
             ]),
-            new PasswordValidator(['password' => $request->body('password')], $this->form),
         ];
     }
 }
