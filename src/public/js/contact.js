@@ -49,10 +49,13 @@ jQuery(document).ready(function($) {
 
         let $this = $(this),
             $form = $('form#contact-form'),
-            formData = new FormData($form[0]);
+            formData = new FormData($form[0]),
+            $photo = $('#photo');
 
-        let photo = $('#photo')[0].files[0];
-        formData.append('photo', photo);
+        if ($photo.length && $photo[0].files.length) {
+            let photo = $photo[0].files[0];
+            formData.append('photo', photo);
+        }
 
         $.ajax({
             url: $form.attr('action'),
