@@ -10,7 +10,20 @@
     caption-side: top;
 }
 
+/*.contacts-wrapper {*/
+/*    display: grid;*/
+/*    grid-template-columns: auto 25px auto;*/
+/*}*/
+
 .contacts-wrapper {
     display: grid;
-    grid-template-columns: auto 25px auto;
+    grid-template-columns: auto 25px auto auto;
+}
+
+.js-show-add-contact-form, .js-add-contact {
+    float: right;
+}
+
+.contact-form {
+    display: none;
 }

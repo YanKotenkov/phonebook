@@ -1,14 +1,17 @@
 <?php
 /**
  * @var View $this
- * @var \models\User $user
- * @var \forms\ContactForm $contactForm
- * @var \forms\ContactForm[] $contactList
+ * @var User $user
+ * @var ContactForm $contactForm
+ * @var ContactForm[] $contactList
  * @var string $sortParam
  * @var string $sortOrder
  */
 
+use forms\ContactForm;
 use lib\View;
+use models\User;
+
 ?>
 <table class="table table-bordered table-hover table-condensed">
     <caption id="contact-table-caption">Список контактов</caption>
@@ -82,3 +85,4 @@ use lib\View;
     <?php endforeach ?>
     </tbody>
 </table>
+<button class="btn btn-success js-show-add-contact-form">Добавить</button>

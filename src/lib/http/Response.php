@@ -5,10 +5,12 @@ class Response
 {
     const HTTP_CODE_OK = 200;
     const HTTP_CODE_NOT_FOUND = 404;
+    const HTTP_UNPROCESSABLE_ENTITY = 422;
 
     public static $statusTexts = [
         self::HTTP_CODE_OK => 'OK',
         self::HTTP_CODE_NOT_FOUND => 'Not Found',
+        self::HTTP_UNPROCESSABLE_ENTITY => 'Unprocessable Entity',
     ];
 
     /** @var string */

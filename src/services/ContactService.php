@@ -12,6 +12,8 @@ class ContactService
     public $sortParam = 'name';
     /** @var string */
     public $sortOrder = 'ASC';
+    /** @var array */
+    public $errors = [];
 
     /** @var Contact */
     private $contactModel;
@@ -76,8 +78,26 @@ class ContactService
         foreach ($this->contactForm->mapAttributes() as $dbField => $formField) {
             $fields[$formField] = $contact->{$dbField};
         }
-        $fields['phoneToWords'] = NumberHelper::sumToWords($contact->phone);
+        $fields['phoneToWords'] = NumberHelper::sumToWords((int)$contact->phone);
 
         return $fields;
+    }
+
+    /**
+     * @return bool
+     */
+    public function addContact()
+    {
+        foreach (array_flip($this->contactForm->mapAttributes()) as $formField => $dbField) {
+            $this->contactModel->$dbField = $this->contactForm->$formField;
+        }
+
+        if (!$this->contactModel->insert(['user_id', 'name', 'second_name', 'phone', 'email'])) {
+            $this->errors = $this->contactModel->getErrors();
+
+            return false;
+        }
+
+        return $this->contactModel->id;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use actions\AddContactAction;
 use actions\AuthAction;
 use actions\ContactInfoAction;
 use actions\LogoutAction;
@@ -29,7 +30,10 @@ return [
             'action' => PhoneBookAction::class,
         ],
         '/contact-info' => [
-            'action' => ContactInfoAction::class
+            'action' => ContactInfoAction::class,
+        ],
+        '/add-contact' => [
+            'action' => AddContactAction::class,
         ],
         '/logout' => [
             'action' => LogoutAction::class,

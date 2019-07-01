@@ -4,7 +4,6 @@ namespace actions;
 use forms\ContactForm;
 use lib\Action;
 use lib\http\Request;
-use lib\http\Response;
 use models\Contact;
 use services\ContactService;
 
@@ -16,9 +15,7 @@ class ContactInfoAction extends Action
     /** @inheritdoc */
     public function run(Request $request)
     {
-        if (!$id = $request->query('id')) {
-            (new Response())->notFound();
-        }
+        $id = $request->query('id');
 
         $contactService = new ContactService(new Contact(), $this->form);
         $fields = $contactService->getContactInfo($id);

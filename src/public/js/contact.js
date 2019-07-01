@@ -2,7 +2,8 @@ jQuery(document).ready(function($) {
     'use strict';
     let $contactList = $('.contact-list'),
         $showContactInfo = $('.show-contact-info'),
-        $contactInfo = $('.contact-info');
+        $contactInfo = $('.contact-info'),
+        $contactForm = $('.contact-form');
 
     $('body').on('click', '.js-sort-link', function (event) {
         event.preventDefault();
@@ -23,6 +24,8 @@ jQuery(document).ready(function($) {
 
         $showContactInfo.removeClass('table-active');
         $this.addClass('table-active');
+        $contactForm.hide();
+        $('.js-show-add-contact-form').show();
 
         $.get({
             url: 'contact-info',
@@ -33,5 +36,48 @@ jQuery(document).ready(function($) {
                 $contactInfo.html(response);
             }
         });
-    })
+    }).on('click', '.js-show-add-contact-form', function () {
+        let $this = $(this);
+
+        $this.hide();
+        $showContactInfo.removeClass('table-active');
+        $contactInfo.html('');
+        $contactForm.show();
+    }).on('click', '.js-add-contact', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        let $this = $(this),
+            $form = $('form#contact-form'),
+            formData = new FormData($form[0]);
+
+        $.ajax({
+            url: $form.attr('action'),
+            method: 'post',
+            data: formDataToJson(formData),
+            contentType: 'application/json; charset=utf-8',
+            processData: true,
+            success: (response, status, jqHHR) => {
+                $contactForm.html(response);
+                $.get({
+                    url: '/',
+                    success: response => {
+                        $contactList.html(response);
+                    }
+                });
+            },
+            error: (jqHHR) => {
+                if (jqHHR.status === 422) {
+                    $contactForm.html(jqHHR.responseText);
+                }
+            }
+        });
+    });
+
+    function formDataToJson(formData) {
+        let object = {};
+        formData.forEach((value, key) => {object[key] = value});
+
+        return JSON.stringify(object);
+    }
 });

@@ -1,14 +1,18 @@
 <?php
 /**
  * @var View $this
- * @var \models\User $user
- * @var \forms\ContactForm $contactForm
- * @var \forms\ContactForm[] $contactList
+ * @var User $user
+ * @var ContactForm $contactForm
+ * @var ContactForm[] $contactList
  * @var string $sortParam
  * @var string $sortOrder
  */
+
+use forms\ContactForm;
 use lib\View;
-$this->registerJsFile('contact')
+use models\User;
+
+$this->registerJsFile('contact');
 ?>
 <div class="contacts-wrapper">
     <div class="contact-list">
@@ -16,5 +20,8 @@ $this->registerJsFile('contact')
     </div>
     <div class="divide"></div>
     <div class="contact-info">
+    </div>
+    <div class="contact-form">
+        <?= $this->render('_contact_form', compact('contactForm')) ?>
     </div>
 </div>

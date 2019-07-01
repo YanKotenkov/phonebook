@@ -21,13 +21,6 @@ class ContactForm extends BaseForm
     /** @var string */
     public $insDate;
 
-    /** @var array */
-    public static $requiredFields = [
-        'name',
-        'phone',
-        'email',
-    ];
-
     /** @inheritdoc */
     public function attributeLabels()
     {
@@ -56,6 +49,16 @@ class ContactForm extends BaseForm
             'phone' => 'phone',
             'ins_date' => 'insDate',
             'user_id' => 'userId',
+        ];
+    }
+
+    /** @inheritDoc */
+    public function getRequiredFields()
+    {
+        return [
+            'name',
+            'phone',
+            'email',
         ];
     }
 }

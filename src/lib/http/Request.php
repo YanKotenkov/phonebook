@@ -52,6 +52,23 @@ class Request
      * @param mixed $defaultValue
      * @return array|mixed
      */
+    public function getRawBody($name = null, $defaultValue = null)
+    {
+        $jsonInput = file_get_contents('php://input');
+        $data = json_decode($jsonInput, true);
+
+        if (is_null($name)) {
+            return $data;
+        }
+
+        return isset($data[$name]) ? $data[$name] : $defaultValue;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $defaultValue
+     * @return array|mixed
+     */
     public function files($name = null, $defaultValue = null)
     {
         return $this->getRequestParams('files', $name, $defaultValue);
