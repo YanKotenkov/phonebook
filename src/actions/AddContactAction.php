@@ -6,11 +6,15 @@ use lib\Action;
 use lib\http\Request;
 use lib\http\Response;
 use lib\validators\EmailValidator;
+use lib\validators\ImageValidator;
 use lib\validators\RequiredValidator;
 use lib\validators\StringValidator;
 use models\Contact;
 use services\ContactService;
 
+/**
+ * Экшн добавления контакта
+ */
 class AddContactAction extends Action
 {
     /** @var string */
@@ -23,7 +27,10 @@ class AddContactAction extends Action
             (new Response())->notFound();
         }
 
-        $this->form->load(array_merge($request->getRawBody(), ['userId' => $this->getUser()->id]));
+        $this->form->load(array_merge($request->body(), [
+            'userId' => $this->getUser()->id,
+            'photo' => $request->files('photo'),
+        ]));
         $contactService = new ContactService(new Contact(), $this->form);
 
         if ($this->validatorRunner->hasErrors()) {
@@ -51,19 +58,20 @@ class AddContactAction extends Action
     {
         $requiredFields = [];
         foreach ($this->form->getRequiredFields() as $field) {
-            $requiredFields[$field] = $request->getRawBody($field);
+            $requiredFields[$field] = $request->body($field);
         }
 
         return [
+            new ImageValidator(['photo' => $request->files('photo')]),
             new RequiredValidator($requiredFields, $this->form),
             new StringValidator([
-                'name' => $request->getRawBody('name'),
-                'secondName' => $request->getRawBody('secondName'),
-                'email' => $request->getRawBody('email'),
-                'phone' => $request->getRawBody('phone'),
+                'name' => $request->body('name'),
+                'secondName' => $request->body('secondName'),
+                'email' => $request->body('email'),
+                'phone' => $request->body('phone'),
             ]),
             new EmailValidator([
-                'email' => $request->getRawBody('email'),
+                'email' => $request->body('email'),
             ]),
         ];
     }

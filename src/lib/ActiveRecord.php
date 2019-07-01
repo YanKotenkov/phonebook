@@ -120,6 +120,7 @@ abstract class ActiveRecord
 
         $db = self::getDb();
         $sth = $db->prepare($this->query);
+
         $this->bindValues($sth, $fieldNames);
 
         if (!$sth->execute()) {

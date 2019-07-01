@@ -58,9 +58,6 @@ use models\User;
             </a>
         </th>
         <th>
-            <?= $contactForm->getLabel('photo') ?>
-        </th>
-        <th>
             <a
                     href="/"
                     class="js-sort-link"
@@ -79,7 +76,6 @@ use models\User;
             <td><?= $this->encode($contact->secondName) ?></td>
             <td><?= $this->encode($contact->phone) ?></td>
             <td><?= $this->encode($contact->email) ?></td>
-            <td><?= $contact->photo ?></td>
             <td><?= $contact->insDate ?></td>
         </tr>
     <?php endforeach ?>

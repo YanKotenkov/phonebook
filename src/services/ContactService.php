@@ -6,6 +6,9 @@ use lib\helpers\NumberHelper;
 use lib\BaseForm;
 use models\Contact;
 
+/**
+ * Класс для работы с контактами
+ */
 class ContactService
 {
     /** @var string */
@@ -92,7 +95,9 @@ class ContactService
             $this->contactModel->$dbField = $this->contactForm->$formField;
         }
 
-        if (!$this->contactModel->insert(['user_id', 'name', 'second_name', 'phone', 'email'])) {
+        $this->contactModel->photo = addslashes(file_get_contents($this->contactForm->photo['tmp_name']));
+
+        if (!$this->contactModel->insert(['user_id', 'name', 'second_name', 'phone', 'email', 'photo'])) {
             $this->errors = $this->contactModel->getErrors();
 
             return false;

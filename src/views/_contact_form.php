@@ -23,25 +23,49 @@ use forms\ContactForm;
                 <tbody>
                 <tr class="table-light">
                     <td><label for="name"><?= $contactForm->getLabel('name') ?></label></td>
-                    <td><input id="name" type="text" name="name" value="<?= $contactForm->name ?>"></td>
+                    <td>
+                        <input
+                            id="name" type="text" name="name" value="<?= $contactForm->name ?>"
+                            <?= $contactForm->isRequired('name') ? 'required' : '' ?>
+                        >
+                    </td>
                 </tr>
                 <tr class="table-light">
                     <td><label for="secondName"><?= $contactForm->getLabel('secondName') ?></label></td>
                     <td>
-                        <input id="secondName" type="text" name="secondName" value="<?= $contactForm->secondName ?>">
+                        <input
+                            id="secondName" type="text" name="secondName" value="<?= $contactForm->secondName ?>"
+                            <?= $contactForm->isRequired('secondName') ? 'required' : '' ?>
+                        >
                     </td>
                 </tr>
                 <tr class="table-light">
                     <td><label for="phone"><?= $contactForm->getLabel('phone') ?></label></td>
-                    <td><input id="phone" type="text" name="phone" value="<?= $contactForm->phone ?>"></td>
+                    <td>
+                        <input
+                            id="phone" type="text" name="phone" value="<?= $contactForm->phone ?>"
+                            <?= $contactForm->isRequired('phone') ? 'required' : '' ?>
+                        >
+                    </td>
                 </tr>
                 <tr class="table-light">
                     <td><label for="email"><?= $contactForm->getLabel('email') ?></label></td>
-                    <td><input id="email" type="email" name="email" value="<?= $contactForm->email ?>"></td>
+                    <td>
+                        <input
+                            id="email" type="email" name="email" value="<?= $contactForm->email ?>"
+                            <?= $contactForm->isRequired('email') ? 'required' : '' ?>
+                        >
+                    </td>
                 </tr>
                 <tr class="table-light">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
                     <td><label for="photo"><?= $contactForm->getLabel('photo') ?></label></td>
-                    <td><input id="photo" type="file" name="photo"></td>
+                    <td>
+                        <input
+                            id="photo" type="file" name="photo"
+                            <?= $contactForm->isRequired('photo') ? 'required' : '' ?>
+                        >
+                    </td>
                 </tr>
                 </tbody>
             </table>

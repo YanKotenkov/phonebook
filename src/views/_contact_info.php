@@ -12,7 +12,17 @@
             <?php foreach ($fields as $name => $value) : ?>
                 <tr class="table-light">
                     <td><?= $contactForm->getLabel($name) ?></td>
-                    <td><?= $value ?></td>
+                    <?php if ($name === 'photo') : ?>
+                        <td>
+                            <img
+                                src="<?= "data:image/*;base64, " . base64_encode(stripslashes($value)) ?>"
+                                alt=""
+                                class="rounded img-fluid"
+                            >
+                        </td>
+                    <?php else : ?>
+                            <td><?= $value ?></td>
+                    <?php endif ?>
                 </tr>
             <?php endforeach ?>
             </tbody>

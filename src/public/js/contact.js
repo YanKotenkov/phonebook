@@ -51,12 +51,15 @@ jQuery(document).ready(function($) {
             $form = $('form#contact-form'),
             formData = new FormData($form[0]);
 
+        let photo = $('#photo')[0].files[0];
+        formData.append('photo', photo);
+
         $.ajax({
             url: $form.attr('action'),
             method: 'post',
-            data: formDataToJson(formData),
-            contentType: 'application/json; charset=utf-8',
-            processData: true,
+            data: formData,
+            contentType: false,
+            processData: false,
             success: (response, status, jqHHR) => {
                 $contactForm.html(response);
                 $.get({
@@ -73,11 +76,4 @@ jQuery(document).ready(function($) {
             }
         });
     });
-
-    function formDataToJson(formData) {
-        let object = {};
-        formData.forEach((value, key) => {object[key] = value});
-
-        return JSON.stringify(object);
-    }
 });
