@@ -163,6 +163,24 @@ abstract class ActiveRecord
     }
 
     /**
+     * @param int $id
+     * @return bool
+     */
+    public function deleteById($id)
+    {
+        $db = self::getDb();
+        $this->query = "DELETE FROM {$this->tableName()} WHERE ID = :id";
+        $sth = $db->prepare($this->query);
+        $sth->bindValue(':id', $id);
+        if (!$sth->execute()) {
+            $this->errors[] = $sth->errorInfo();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return array
      */
     public function getErrors()

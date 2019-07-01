@@ -105,4 +105,13 @@ class ContactService
 
         return $this->contactModel->id;
     }
+
+    public function deleteContact($id)
+    {
+        if (!$this->contactModel->deleteById($id)) {
+            $this->errors = $this->contactModel->getErrors();
+            return false;
+        }
+        return true;
+    }
 }

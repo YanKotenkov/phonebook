@@ -67,6 +67,7 @@ use models\User;
                 <?= $contactForm->getLabel('insDate') ?>
             </a>
         </th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -77,6 +78,7 @@ use models\User;
             <td><?= $this->encode($contact->phone) ?></td>
             <td><?= $this->encode($contact->email) ?></td>
             <td><?= $contact->insDate ?></td>
+            <td><button class="btn btn-danger js-delete-contact" data-id="<?= $id ?>">Удалить</button></td>
         </tr>
     <?php endforeach ?>
     </tbody>

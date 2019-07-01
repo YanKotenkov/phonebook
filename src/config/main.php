@@ -3,6 +3,7 @@
 use actions\AddContactAction;
 use actions\AuthAction;
 use actions\ContactInfoAction;
+use actions\DeleteContactAction;
 use actions\LogoutAction;
 use actions\PhoneBookAction;
 use actions\RegisterAction;
@@ -34,6 +35,9 @@ return [
         ],
         '/add-contact' => [
             'action' => AddContactAction::class,
+        ],
+        '/delete-contact' => [
+            'action' => DeleteContactAction::class,
         ],
         '/logout' => [
             'action' => LogoutAction::class,

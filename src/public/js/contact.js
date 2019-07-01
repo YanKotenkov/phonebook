@@ -47,8 +47,7 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         event.stopPropagation();
 
-        let $this = $(this),
-            $form = $('form#contact-form'),
+        let $form = $('form#contact-form'),
             formData = new FormData($form[0]),
             $photo = $('#photo');
 
@@ -76,6 +75,17 @@ jQuery(document).ready(function($) {
                 if (jqHHR.status === 422) {
                     $contactForm.html(jqHHR.responseText);
                 }
+            }
+        });
+    }).on('click', '.js-delete-contact', function (event) {
+        event.stopImmediatePropagation();
+        let $this = $(this);
+
+        $.ajax({
+            url: '/delete-contact' + '?id=' + $this.data('id'),
+            method: 'post',
+            success: response => {
+
             }
         });
     });
