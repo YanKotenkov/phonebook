@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
     }).on('click', '.show-contact-info', function () {
         let $this = $(this);
 
-        $showContactInfo.removeClass('table-active');
+        $('.show-contact-info').removeClass('table-active');
         $this.addClass('table-active');
         $contactForm.hide();
         $('.js-show-add-contact-form').show();
@@ -63,7 +63,9 @@ jQuery(document).ready(function($) {
             contentType: false,
             processData: false,
             success: (response, status, jqHHR) => {
-                $contactForm.html(response);
+                $contactInfo.html(response);
+                $contactForm.hide();
+                $contactForm.find('form').trigger('reset');
                 $.get({
                     url: '/',
                     success: response => {
