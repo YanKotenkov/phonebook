@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var \lib\View $this
  * @var \forms\RegisterForm $registerForm
  */
  ?>
@@ -55,3 +56,5 @@
         </div>
     </div>
 </form>
+<img src="/captcha">
+<?//= $this->render('captcha') ?>

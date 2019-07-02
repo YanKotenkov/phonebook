@@ -92,15 +92,16 @@ abstract class Action
      * @param string $viewName
      * @param array $params
      * @param int $code
+     * @param array $headers
      * @return Response
      */
-    protected function renderPartial($viewName, array $params = [], $code = null)
+    protected function renderPartial($viewName, array $params = [], $code = null, array $headers = [])
     {
         $view = new View($this, $viewName);
 
         $content = $view->render($viewName, $params);
 
-        return new Response($content, $code);
+        return new Response($content, $code, $headers);
     }
 
     /**

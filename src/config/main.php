@@ -2,6 +2,7 @@
 
 use actions\AddContactAction;
 use actions\AuthAction;
+use actions\CaptchaAction;
 use actions\ContactEditAction;
 use actions\ContactInfoAction;
 use actions\DeleteContactAction;
@@ -46,6 +47,9 @@ return [
         ],
         '/delete-contact' => [
             'action' => DeleteContactAction::class,
+        ],
+        '/captcha' => [
+            'action' => CaptchaAction::class,
         ],
         '/logout' => [
             'action' => LogoutAction::class,
