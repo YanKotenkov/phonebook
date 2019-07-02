@@ -4,6 +4,7 @@
  */
 
 use forms\ContactForm;
+use lib\validators\PhoneValidator;
 
 ?>
 <form id="contact-form" action="/add-contact" method="post" enctype="multipart/form-data">
@@ -43,7 +44,8 @@ use forms\ContactForm;
                     <td><label for="phone"><?= $contactForm->getLabel('phone') ?></label></td>
                     <td>
                         <input
-                            id="phone" type="text" name="phone" value="<?= $contactForm->phone ?>"
+                            id="phone" type="tel" name="phone" value="<?= $contactForm->phone ?>"
+                            pattern=<?= PhoneValidator::PHONE_REGEX ?>
                             <?= $contactForm->isRequired('phone') ? 'required' : '' ?>
                         >
                     </td>

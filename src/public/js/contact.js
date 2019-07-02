@@ -45,7 +45,6 @@ jQuery(document).ready(function($) {
         $contactForm.show();
     }).on('click', '.js-add-contact', function (event) {
         event.preventDefault();
-        event.stopPropagation();
 
         let $form = $('form#contact-form'),
             formData = new FormData($form[0]),
