@@ -7,6 +7,7 @@ use lib\http\Request;
 use lib\http\Response;
 use lib\validators\EmailValidator;
 use lib\validators\ImageValidator;
+use lib\validators\PhoneValidator;
 use lib\validators\RequiredValidator;
 use lib\validators\StringValidator;
 use models\Contact;
@@ -72,6 +73,9 @@ class AddContactAction extends Action
             ]),
             new EmailValidator([
                 'email' => $request->body('email'),
+            ]),
+            new PhoneValidator([
+                'phone' => $request->body('phone'),
             ]),
         ];
     }
