@@ -17,7 +17,7 @@ class PhoneValidator extends BaseValidator
      */
     public function defaultValidation($name, $value)
     {
-        if (!preg_match('/^(\+?7|8)?[- (]?\d{3}[- )]?[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/', $value)) {
+        if (!preg_match('/^(\+?7|8)?[- (]?(\d{3})?[- )]?[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/', $value)) {
             $this->addError(
                 $name,
                 "{$this->getAttributeLabel($name)} неверный формат телефона"
