@@ -13,10 +13,7 @@ use lib\validators\StringValidator;
 use models\Contact;
 use services\ContactService;
 
-/**
- * Экшн добавления контакта
- */
-class AddContactAction extends Action
+class ContactEditAction extends Action
 {
     /** @var string */
     protected $formClass = ContactForm::class;
@@ -27,6 +24,8 @@ class AddContactAction extends Action
         if (!$request->isAjax()) {
             (new Response())->notFound();
         }
+
+        $id =$request->body('id');
 
         $this->form->load(array_merge($request->body(), [
             'userId' => $this->getUser()->id,
@@ -41,7 +40,7 @@ class AddContactAction extends Action
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if (!$id = $contactService->addContact()) {
+        if (!$contactService->editContact($id)) {
             return $this->renderPartial('_contact_form', [
                 'contactForm' => $this->form,
                 'errors' => $contactService->errors,
@@ -63,8 +62,7 @@ class AddContactAction extends Action
             $requiredFields[$field] = $request->body($field);
         }
 
-        return [
-            new ImageValidator(['photo' => $request->files('photo')]),
+        $validators = [
             new RequiredValidator($requiredFields, $this->form),
             new StringValidator([
                 'name' => $request->body('name'),
@@ -79,5 +77,11 @@ class AddContactAction extends Action
                 'phone' => $request->body('phone'),
             ]),
         ];
+
+        if ($request->files('photo') && !empty($request->files('photo')['name'])) {
+            $validators[] = new ImageValidator(['photo' => $request->files('photo')]);
+        }
+
+        return $validators;
     }
 }

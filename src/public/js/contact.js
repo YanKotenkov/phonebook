@@ -37,18 +37,50 @@ jQuery(document).ready(function($) {
             }
         });
     }).on('click', '.js-show-add-contact-form', function () {
-        let $this = $(this);
+        let $this = $(this),
+            $form = $contactForm.find('form');
 
         $this.hide();
         $showContactInfo.removeClass('table-active');
         $contactInfo.html('');
         $contactForm.show();
-    }).on('click', '.js-add-contact', function (event) {
+        if ($form.find('input#id').length) {
+            $form.find('input#id').remove();
+        }
+        $('#contact-edit-caption').text('Добавить контакт');
+        $('.js-save-contact').attr('data-url', '/add-contact');
+    }).on('click', '.js-show-edit-contact-form', function () {
+        let $this = $(this),
+            id = $this.data('id');
+
+        $contactInfo.html('');
+
+        $.get({
+            url: '/get-contact-form',
+            data: {
+                id: id
+            },
+            success: response => {
+                $contactForm.show();
+                $contactForm.html(response);
+                let $form = $contactForm.find('form');
+                if ($form.find('input#id').length) {
+                    $form.find('input#id').val(id);
+                } else {
+                    $form.append('<input id="id" name="id" value="' + id +'" type="hidden">');
+                }
+                $('#contact-edit-caption').text('Редактировать контакт');
+                $('.js-save-contact').attr('data-url', '/edit-contact');
+            }
+        });
+    }).on('click', '.js-save-contact', function (event) {
         event.preventDefault();
 
-        let $form = $('form#contact-form'),
+        let $this = $(this),
+            $form = $('form#contact-form'),
             formData = new FormData($form[0]),
-            $photo = $('#photo');
+            $photo = $('#photo'),
+            id = formData.get('id');
 
         if ($photo.length && $photo[0].files.length) {
             let photo = $photo[0].files[0];
@@ -56,13 +88,18 @@ jQuery(document).ready(function($) {
         }
 
         $.ajax({
-            url: $form.attr('action'),
+            url: $this.data('url'),
             method: 'post',
             data: formData,
             contentType: false,
             processData: false,
             success: (response, status, jqHHR) => {
                 $contactInfo.html(response);
+
+                if (id !== null) {
+                    $contactForm.find('form')
+                }
+
                 $contactForm.hide();
                 $contactForm.find('form').trigger('reset');
                 $.get({

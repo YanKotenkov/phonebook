@@ -2,8 +2,10 @@
 
 use actions\AddContactAction;
 use actions\AuthAction;
+use actions\ContactEditAction;
 use actions\ContactInfoAction;
 use actions\DeleteContactAction;
+use actions\GetContactFormAction;
 use actions\LogoutAction;
 use actions\PhoneBookAction;
 use actions\RegisterAction;
@@ -33,8 +35,14 @@ return [
         '/contact-info' => [
             'action' => ContactInfoAction::class,
         ],
+        '/get-contact-form' => [
+            'action' => GetContactFormAction::class
+        ],
         '/add-contact' => [
             'action' => AddContactAction::class,
+        ],
+        '/edit-contact' => [
+            'action' => ContactEditAction::class,
         ],
         '/delete-contact' => [
             'action' => DeleteContactAction::class,

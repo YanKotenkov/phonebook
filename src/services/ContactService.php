@@ -87,15 +87,17 @@ class ContactService
     }
 
     /**
-     * @return bool
+     * @return int|bool
      */
     public function addContact()
     {
         foreach (array_flip($this->contactForm->mapAttributes()) as $formField => $dbField) {
-            $this->contactModel->$dbField = $this->contactForm->$formField;
+            if ($formField === 'photo') {
+                $this->contactModel->photo = addslashes(file_get_contents($this->contactForm->photo['tmp_name']));
+            } else {
+                $this->contactModel->$dbField = $this->contactForm->$formField;
+            }
         }
-
-        $this->contactModel->photo = addslashes(file_get_contents($this->contactForm->photo['tmp_name']));
 
         if (!$this->contactModel->insert(['user_id', 'name', 'second_name', 'phone', 'email', 'photo'])) {
             $this->errors = $this->contactModel->getErrors();
@@ -106,6 +108,37 @@ class ContactService
         return $this->contactModel->id;
     }
 
+    public function editContact($id)
+    {
+        $this->contactModel = $this->contactModel->findByPk($id);
+
+        foreach (array_flip($this->contactForm->mapAttributes()) as $formField => $dbField) {
+            if ($formField === 'photo') {
+                if (!empty($this->contactForm->photo) && !empty($this->contactForm->photo['tmp_name'])) {
+                    $this->contactModel->photo = addslashes(file_get_contents($this->contactForm->photo['tmp_name']));
+                } else {
+                    continue;
+                }
+            } else {
+                $this->contactModel->$dbField = $this->contactForm->$formField;
+            }
+        }
+
+        if (empty($this->contactForm->photo)) {
+            $updateFields = ['user_id', 'name', 'second_name', 'phone', 'email'];
+        } else {
+            $updateFields = ['user_id', 'name', 'second_name', 'phone', 'email', 'photo'];
+        }
+
+        if (!$this->contactModel->update($updateFields)) {
+            $this->errors = $this->contactModel->getErrors();
+
+            return false;
+        }
+
+        return true;
+    }
+
     public function deleteContact($id)
     {
         if (!$this->contactModel->deleteById($id)) {
@@ -113,5 +146,18 @@ class ContactService
             return false;
         }
         return true;
+    }
+
+    public function fillContactForm($id)
+    {
+        $values = $this->getContactInfo($id);
+
+        foreach ($this->contactForm->mapAttributes() as $field) {
+            if ($field !== 'photo' && isset($values[$field])) {
+                $this->contactForm->$field = $values[$field];
+            }
+        }
+
+        return $this->contactForm;
     }
 }

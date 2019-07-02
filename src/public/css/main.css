@@ -6,24 +6,23 @@
     display: inline-block;
 }
 
-#contact-table-caption, #contact-detail-caption {
+#contact-table-caption, #contact-detail-caption, #contact-edit-caption {
     caption-side: top;
 }
-
-/*.contacts-wrapper {*/
-/*    display: grid;*/
-/*    grid-template-columns: auto 25px auto;*/
-/*}*/
 
 .contacts-wrapper {
     display: grid;
     grid-template-columns: auto 25px auto auto;
 }
 
-.js-show-add-contact-form, .js-add-contact {
+.js-show-add-contact-form, .js-save-contact {
     float: right;
 }
 
 .contact-form {
     display: none;
+}
+
+.js-show-edit-contact-form {
+    margin-left: 10px;
 }

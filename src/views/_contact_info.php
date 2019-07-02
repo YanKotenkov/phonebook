@@ -2,12 +2,18 @@
 /**
  * @var \forms\ContactForm $contactForm
  * @var array $fields
+ * @var int $id
  */
 ?>
 <div class="card">
     <div class="card-body">
         <table class="table table-hover table-condensed">
-            <caption id="contact-detail-caption">Информация о контакте</caption>
+            <caption id="contact-detail-caption">
+                Информация о контакте
+                <button class="btn btn-primary js-show-edit-contact-form" data-id="<?= $id ?>">
+                    Редактировать
+                </button>
+            </caption>
             <tbody>
             <?php foreach ($fields as $name => $value) : ?>
                 <tr class="table-light">

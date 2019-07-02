@@ -23,6 +23,7 @@ class ContactInfoAction extends Action
         $viewParams = [
             'fields' => $fields,
             'contactForm' => $this->form,
+            'id' => $id,
         ];
 
         if ($request->isAjax()) {

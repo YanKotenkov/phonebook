@@ -5,9 +5,8 @@
 
 use forms\ContactForm;
 use lib\validators\PhoneValidator;
-
 ?>
-<form id="contact-form" action="/add-contact" method="post" enctype="multipart/form-data">
+<form id="contact-form" action="" method="post" enctype="multipart/form-data">
     <div class="card">
         <div class="card-body">
             <?php if (isset($errors)) : ?>
@@ -20,7 +19,7 @@ use lib\validators\PhoneValidator;
                 </div>
             <?php endif ?>
             <table class="table table-hover table-condensed">
-                <caption id="contact-detail-caption">Добавить контакт</caption>
+                <caption id="contact-edit-caption"></caption>
                 <tbody>
                 <tr class="table-light">
                     <td><label for="name"><?= $contactForm->getLabel('name') ?></label></td>
@@ -71,7 +70,7 @@ use lib\validators\PhoneValidator;
                 </tr>
                 </tbody>
             </table>
-            <button class="js-add-contact btn btn-success">Сохранить</button>
+            <button class="js-save-contact btn btn-success">Сохранить</button>
         </div>
     </div>
 </form>
