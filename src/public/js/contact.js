@@ -82,12 +82,21 @@ jQuery(document).ready(function($) {
         event.stopImmediatePropagation();
         let $this = $(this);
 
-        $.ajax({
-            url: '/delete-contact' + '?id=' + $this.data('id'),
-            method: 'post',
-            success: response => {
-
-            }
-        });
+        if (confirm('Вы точно хотите удалить запись?')) {
+            $.ajax({
+                url: '/delete-contact' + '?id=' + $this.data('id'),
+                method: 'post',
+                success: response => {
+                    $contactInfo.html('');
+                    $contactForm.hide();
+                    $.get({
+                        url: '/',
+                        success: response => {
+                            $contactList.html(response);
+                        }
+                    });
+                }
+            });
+        }
     });
 });
