@@ -16,6 +16,9 @@
             </caption>
             <tbody>
             <?php foreach ($fields as $name => $value) : ?>
+                <?php if ($name === 'userId') : ?>
+                    <?php continue ?>
+                <?php endif ?>
                 <tr class="table-light">
                     <td><?= $contactForm->getLabel($name) ?></td>
                     <?php if ($name === 'photo') : ?>

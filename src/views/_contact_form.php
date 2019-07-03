@@ -59,7 +59,6 @@ use lib\validators\PhoneValidator;
                     </td>
                 </tr>
                 <tr class="table-light">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
                     <td><label for="photo"><?= $contactForm->getLabel('photo') ?></label></td>
                     <td>
                         <input
