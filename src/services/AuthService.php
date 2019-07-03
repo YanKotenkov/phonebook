@@ -132,6 +132,6 @@ class AuthService
      */
     private function checkCaptcha($captchaCode)
     {
-        return md5($captchaCode) === $this->sessionCaptcha;
+        return md5(trim($captchaCode)) === $this->sessionCaptcha;
     }
 }
