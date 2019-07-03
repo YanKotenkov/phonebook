@@ -2,6 +2,8 @@
 
 namespace lib\captcha;
 
+use lib\Session;
+
 /**
  * Класс для генерации капчи
  */
@@ -93,16 +95,6 @@ class Captcha
         shuffle($splittedChars);
 
         return implode('', $splittedChars);
-    }
-
-    /**
-     * @param int $code
-     */
-    public function setCookie($code)
-    {
-        $cookie = md5($code);
-        $cookieLifeTime = time() + self::DEFAULT_COOKIE_LIFETIME;
-        setcookie("captcha", $cookie, $cookieLifeTime);
     }
 
     /**

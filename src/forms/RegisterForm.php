@@ -5,6 +5,8 @@ class RegisterForm extends UserForm
 {
     /** @var string */
     public $email;
+    /** @var string */
+    public $captchaCode;
 
     /** @inheritdoc */
     public function getRequiredFields()
@@ -13,6 +15,7 @@ class RegisterForm extends UserForm
             'login',
             'password',
             'email',
+            'captchaCode',
         ];
     }
 }

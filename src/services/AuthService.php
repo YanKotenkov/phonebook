@@ -16,14 +16,18 @@ class AuthService
     public $userForm;
     /** @var array */
     public $errors = [];
+    /** @var string */
+    private $sessionCaptcha;
 
     /**
      * AuthService constructor.
      * @param BaseForm $userForm
+     * @param string $sessionCaptcha
      */
-    public function __construct(BaseForm $userForm)
+    public function __construct(BaseForm $userForm, $sessionCaptcha = null)
     {
         $this->userForm = $userForm;
+        $this->sessionCaptcha = $sessionCaptcha;
     }
 
     /**
@@ -57,6 +61,11 @@ class AuthService
 
         if ($this->findUser(['email' => $this->userForm->email])) {
             $this->errors['email'][] = 'Пользователь с таким email уже существует';
+            return false;
+        }
+
+        if (!$this->checkCaptcha($this->userForm->captchaCode)) {
+            $this->errors['captcha'][] = 'Введён неправильный код капчи';
             return false;
         }
 
@@ -115,5 +124,14 @@ class AuthService
     private function verifyPassword($password, $hash)
     {
         return password_verify($password, $hash);
+    }
+
+    /**
+     * @param string $captchaCode
+     * @return bool
+     */
+    private function checkCaptcha($captchaCode)
+    {
+        return md5($captchaCode) === $this->sessionCaptcha;
     }
 }

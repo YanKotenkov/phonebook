@@ -51,6 +51,17 @@
                     <?= $registerForm->isRequired('email') ? 'required' : '' ?>
                 >
             </div>
+            <div class="form-group">
+                <label for="captchaCode"><?= $registerForm->getLabel('captchaCode') ?></label>
+                <input
+                        class="form-control"
+                        type="text"
+                        name="captchaCode"
+                        id="captchaCode"
+                        placeholder="<?= $registerForm->getLabel('captchaCode') ?>"
+                    <?= $registerForm->isRequired('captchaCode') ? 'required' : '' ?>
+                >
+            </div>
             <input type="submit" class="btn btn-success" value="Зарегистрироваться">
             <a href="/auth" class="btn btn-primary">Вход по логину и паролю</a>
         </div>

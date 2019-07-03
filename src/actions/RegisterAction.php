@@ -35,7 +35,7 @@ class RegisterAction extends Action
                 ]);
             }
 
-            $authService = new AuthService($this->form);
+            $authService = new AuthService($this->form, $this->session->get('captcha'));
             if ($authService->register()) {
                 return $this->redirect('/phone-book');
             } else {

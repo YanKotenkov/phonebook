@@ -15,7 +15,7 @@ class CaptchaAction extends Action
     {
         $captcha = new Captcha();
         $code = $captcha->generateRandomCode();
-        $captcha->setCookie($code);
+        $this->session->addKey('captcha', md5($code));
 
         return $this->renderPartial('captcha', compact('captcha', 'code'), null, [
             'Content-Type' => 'image/png',

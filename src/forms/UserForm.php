@@ -18,6 +18,7 @@ class UserForm extends \lib\BaseForm
             'password' => 'Пароль',
             'email' => 'Email',
             'ins_date' => 'Дата создания',
+            'captchaCode' => 'Код капчи',
         ];
     }
 
